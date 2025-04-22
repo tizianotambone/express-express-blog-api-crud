@@ -42,4 +42,6 @@ const posts = [
       image: "/imgs/posts/torta_paesana.avif",
       tags: ["Dolci", "Dolci al cioccolato", "Torte", "Ricette vegetariane", "Ricette al forno"],
     }
-]
+];
+
+module.exports=posts

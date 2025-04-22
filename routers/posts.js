@@ -3,25 +3,13 @@
 const express = require('express');
 const router = express.Router(); 
 
-const postController=require('../controllers/contollers.js')
+const postController=require('../controllers/controllers.js')
 
-router.get('/',(req,res)=>{
-  res.send(posts)
-});
-router.get('/:id',(req,res)=>{
-    res.send('dettaglio del mio blog'+req.params.id)
-});
-router.post('/',(req,res)=>{
-    res.send('inserimento di nuove informazioni del blog')
-})
-router.put('/:id',(req,res)=>{
-    res.send(`modifica totale delle informazioni del singolo blog:${req.params.id} `)
-});
-router.patch('/:id',(req,res)=>{
-    res.send(`modifica parziale del blog${req.params.id}`)
-})
-router.delete('/:id',(res,req)=>{
-    res.send(`cancellazione delle informazioni del blog${req.params.id}`)
-})
+router.get('/', postController.index)
+router.get('/:id', postController.show);
+router.post('/', postController.store)
+router.put('/:id', postController.update);
+router.patch('/:id', postController.modify)
+router.delete('/:id', postController.destroy)
 module.exports=router;
 
