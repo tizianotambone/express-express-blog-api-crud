@@ -1,5 +1,5 @@
 const { request } = require("express")
-const posts=require(`../data/posts.js`)
+let posts=require(`../data/posts.js`)
 
 
 function index(req,res){
@@ -36,7 +36,23 @@ function modify(req,res){
 function destroy(req,res){
     let id= parseInt(req.params.id);
     let post = posts.find(post=>post.id==id)
-    console.log(post)
+  
+    if ( post===undefined){
+        res.status(404)
+        // restituzione un json co messaggio di errore
+        return res.json({
+            Error:"not found",
+            message:"post non trovato"
+        })
+    }
+    // se ho il post lo elimino
+    posts = posts.filter(post=> post.id!=id)
+    //stampo array aggiornato con consol log
+    console.log(posts)
+    
+    res.status(204)
+    res.send()
+
 }
 
 module.exports={index,show,store,update,modify,destroy};
