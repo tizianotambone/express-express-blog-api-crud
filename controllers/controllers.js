@@ -58,14 +58,14 @@ function destroy(req,res){
             message:"post non trovato"
         })
     }
+
     // se ho il post lo elimino
     posts = posts.filter(post=> post.id!=id)
+    
     //stampo array aggiornato con consol log
     console.log(posts)
-    
     res.status(204)
     res.send()
-
 }
 
 module.exports={index,show,store,update,modify,destroy};
