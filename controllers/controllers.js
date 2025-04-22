@@ -3,7 +3,20 @@ let posts=require(`../data/posts.js`)
 
 
 function index(req,res){
-   res.json(posts)
+   let tag= req.query.tag
+   let filteredPost= posts.filter(post=> post.tags.includes(tag))
+
+   if(filteredPost === undefined){
+        // stato della risposta
+        res.status(404)
+        // restituzione un json co messaggio di errore
+        return res.json({
+            Error:"not found",
+            message:"posts non trovati"
+        })
+    }
+
+    res.send(filteredPost)
 }
 
 function show(req,res){
