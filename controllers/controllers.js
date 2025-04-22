@@ -1,3 +1,4 @@
+const { request } = require("express")
 const posts=require(`../data/posts.js`)
 
 
@@ -33,7 +34,9 @@ function modify(req,res){
 }
 
 function destroy(req,res){
-    res.send(`cancellazione delle informazioni del blog${req.params.id}`)
+    let id= parseInt(req.params.id);
+    let post = posts.find(post=>post.id==id)
+    console.log(post)
 }
 
 module.exports={index,show,store,update,modify,destroy};
