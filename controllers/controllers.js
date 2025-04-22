@@ -6,7 +6,19 @@ function index(req,res){
 }
 
 function show(req,res){
-    res.send('dettaglio del mio blog'+req.params.id)
+    const id = parseInt(req.params.id)
+    const post=posts.find(post => post.id==id)
+    if(post=== undefined){
+        // stato della risposta
+        res.status(404)
+        // restituzione un json co messaggio di errore
+        return res.json({
+            Error:"not found",
+            message:"post non trovato"
+        })
+    }
+
+    res.send(post)
 }
 
 function store(req,res){
