@@ -38,14 +38,17 @@ function show(req,res){
 }
 
 function store(req,res){
-    const body =req.body
-    const newId= posts[posts.length-1].id+1
+    // definizione dell'id del nuovo post
+    const newId = posts[posts.length-1].id+1
+    // recupero i dati da del post da aggiungere 
+    const{ title, content, image, tags } = req.body
+
     let newPost={
         id:newId,
-        title:body.title,
-        content:body.content,
-        image:body.image,
-        tags:body.tags
+        title:title,
+        content:content,
+        image:image,
+        tags:tags
     }
     
    console.log(newPost)
@@ -57,14 +60,31 @@ function store(req,res){
 }
 
 function update(req,res){
-// recupero id del post da modificare 
-    const id = parseint(req.params.id)
-    // recupero i dati del post da modificare 
-    const{ title, content, image, tags } = req.body
-    // recupero la pizza da modificare 
-    const post=posts.find(post=>post.id==id)
+
+    const id=parseInt(req.params.id)
+    // recupero il post da modificare
+    let modifyPost=posts.find(post=>post.id==id)
+
+    // se non trovo il post restituisco errore 404
+    if(modifyPost===undefined){
+        res.status(404)
+        // restituzione un json co messaggio di errore
+        return res.json({
+            Error:"not found",
+            message:"post non trovato"
+        })
+    }
+
+    const { title, content, image, tags } = req.body
+    // modifico i dati dei post
+    modifyPost.title=title
+    modifyPost.content=content
+    modifyPost.image=image
+    modifyPost.tags=tags
     
+    res.json(modifyPost)
 }
+
 function modify(req,res){
     res.send(`modifica parziale del blog${req.params.id}`)
 }
