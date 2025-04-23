@@ -40,7 +40,13 @@ function show(req,res){
 function store(req,res){
     const body =req.body
     const newId= posts[posts.length-1].id+1
-
+    let newPost={
+        id:newId,
+        title:body.title,
+        content:body.content,
+        image:body.image,
+        tags:body.tags
+    }
     
 }
 
