@@ -48,6 +48,12 @@ function store(req,res){
         tags:body.tags
     }
     
+   console.log(newPost)
+
+    posts.push(newPost)
+    res.status(201)
+    res.json(newPost)
+        
 }
 
 function update(req,res){
