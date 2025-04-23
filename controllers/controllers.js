@@ -1,22 +1,24 @@
-const { request } = require("express")
+const express = require("express")
 let posts=require(`../data/posts.js`)
 
 
 function index(req,res){
    let tag= req.query.tag
-   let filteredPost= posts.filter(post=> post.tags.includes(tag))
+   if(tag){ filteredPost= posts.filter(post=> post.tags.includes(tag))
 
-   if(filteredPost === undefined){
-        // stato della risposta
-        res.status(404)
-        // restituzione un json co messaggio di errore
-        return res.json({
-            Error:"not found",
-            message:"posts non trovati"
-        })
-    }
+   }
+//  è un errore dare l'errore 404 perchè in realtà nella ricerca è presente il contenuto 
+//    if(filteredPost === undefined){
+//         // stato della risposta
+//         res.status(404)
+//         // restituzione un json co messaggio di errore
+//         return res.json({
+//             Error:"not found",
+//             message:"posts non trovati"
+//         })
+//     }
 
-    res.send(filteredPost)
+    res.json(tag)
 }
 
 function show(req,res){
@@ -36,7 +38,10 @@ function show(req,res){
 }
 
 function store(req,res){
-    res.send('inserimento di nuove informazioni del blog')
+    const body =req.body
+    const newId= posts[posts.length-1].id+1
+
+    
 }
 
 function update(req,res){
@@ -48,6 +53,9 @@ function modify(req,res){
 
 function destroy(req,res){
     let id= parseInt(req.params.id);
+
+    //  utilizzo del metodo splice 
+    // 
     let post = posts.find(post=>post.id==id)
   
     if ( post===undefined){
