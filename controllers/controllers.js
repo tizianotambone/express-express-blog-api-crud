@@ -57,7 +57,13 @@ function store(req,res){
 }
 
 function update(req,res){
-    res.send(`modifica totale delle informazioni del singolo blog:${req.params.id} `)
+// recupero id del post da modificare 
+    const id = parseint(req.params.id)
+    // recupero i dati del post da modificare 
+    const{ title, content, image, tags } = req.body
+    // recupero la pizza da modificare 
+    const post=posts.find(post=>post.id==id)
+    
 }
 function modify(req,res){
     res.send(`modifica parziale del blog${req.params.id}`)
