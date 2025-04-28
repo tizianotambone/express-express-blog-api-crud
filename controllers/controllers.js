@@ -4,19 +4,9 @@ let posts=require(`../data/posts.js`)
 
 function index(req,res){
    let tag= req.query.tag
-   if(tag){ filteredPost= posts.filter(post=> post.tags.includes(tag))
-
+   if(tag){ 
+    filteredPost= posts.filter(post=> post.tags.includes(tag));
    }
-//  è un errore dare l'errore 404 perchè in realtà nella ricerca è presente il contenuto 
-//    if(filteredPost === undefined){
-//         // stato della risposta
-//         res.status(404)
-//         // restituzione un json co messaggio di errore
-//         return res.json({
-//             Error:"not found",
-//             message:"posts non trovati"
-//         })
-//     }
 
     res.json(tag)
 }
@@ -92,8 +82,6 @@ function modify(req,res){
 function destroy(req,res){
     let id= parseInt(req.params.id);
 
-    //  utilizzo del metodo splice 
-    // 
     let post = posts.find(post=>post.id==id)
   
     if ( post===undefined){
