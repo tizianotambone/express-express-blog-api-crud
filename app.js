@@ -14,3 +14,5 @@ app.listen(port, () => {
   console.log(`lista dei post:${port}`);
 });
 
+const errorhandler=require('./middlewares/errorhandler.js');
+app.use(errorhandler);
